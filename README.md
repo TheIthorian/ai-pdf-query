@@ -10,8 +10,12 @@ This app uses docker. To run the application:
 docker compose up --build
 ```
 
+## Api Keys
+
+Set the `OPENAI_API_KEY` (from openAI dev portal) and the `APP_KEY` (generated and set by you) in `.docker.env`
+
 ## Endpoints
 
-| Method | Url                   | Description                                    |
-| ------ | --------------------- | ---------------------------------------------- |
-| `GET`  | `query/:query_string` | Responds to your query with the pdf as context |
+| Method | Url                  | Description                                    |
+| ------ | -------------------- | ---------------------------------------------- |
+| `GET`  | `query/:query_input` | Responds to your query with the pdf as context |
