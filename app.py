@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request, Response
 from src.genie import Genie
 from src.file_loader import load_pdf
 import os
@@ -12,9 +12,13 @@ genie = Genie("result.txt")
 
 @app.route("/")
 def hello_world():
-    return "Hello, Docker!"
+    return "Hello AI enjoyer!"
 
 
 @app.route("/query/<query_input>")
 def query(query_input):
+    api_key = request.headers.get("api")
+    if api_key == None or api_key != os.environ["APP_KEY"]:
+        return Response("Unauthorized", status=401)
+
     return genie.ask(query_input)

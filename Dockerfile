@@ -51,4 +51,4 @@ COPY . .
 EXPOSE 8080
 
 # Run the application.
-CMD export OPENAI_API_KEY= && python3 -m flask run --host=0.0.0.0 --port=8080
+CMD python3 -m flask run --host=0.0.0.0 --port=8080
