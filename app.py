@@ -17,5 +17,4 @@ def hello_world():
 
 @app.route("/query/<query_input>")
 def query(query_input):
-    return "query: " + query_input
-    # return genie.ask(query_input)
+    return genie.ask(query_input)
