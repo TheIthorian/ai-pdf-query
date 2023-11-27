@@ -10,6 +10,12 @@ This app uses docker. To run the application:
 docker compose up --build
 ```
 
+## Start
+
+```sh
+python3 -m flask run --host=0.0.0.0 --port=8080
+```
+
 ## Api Keys
 
 Set the `OPENAI_API_KEY` (from openAI dev portal) and the `APP_KEY` (generated and set by you) in `.docker.env`
