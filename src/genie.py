@@ -16,19 +16,25 @@ class Genie:
         self.texts = self.text_split(self.documents)
         self.vectordb = self.embeddings(self.texts)
         self.genie = RetrievalQA.from_chain_type(
-            llm=OpenAI(), chain_type="stuff", retriever=self.vectordb.as_retriever()
+            llm=OpenAI(),
+            chain_type="stuff",
+            retriever=self.vectordb.as_retriever(),
         )
 
     @staticmethod
     def text_split(documents: TextLoader):
-        text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=0)
+        text_splitter = RecursiveCharacterTextSplitter(
+            chunk_size=3500, chunk_overlap=20
+        )
         texts = text_splitter.split_documents(documents)
         return texts
 
     @staticmethod
     def embeddings(texts: List[Document]):
         embeddings = OpenAIEmbeddings()
-        vectordb = Chroma.from_documents(texts, embeddings)
+        vectordb = Chroma.from_documents(
+            texts, embeddings, persist_directory="chroma_db"
+        )
         return vectordb
 
     def ask(self, query: str):

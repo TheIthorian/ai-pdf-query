@@ -6,7 +6,7 @@ import os
 
 app = Flask(__name__)
 
-load_pdf("assets/owners_manual.pdf")
+load_pdf("assets/Warhammer_Fantasy_Roleplay_PDF_version4.pdf")
 genie = Genie("result.txt")
 
 
@@ -21,4 +21,10 @@ def query(query_input):
     if api_key == None or api_key != os.environ["APP_KEY"]:
         return Response("Unauthorized", status=401)
 
-    return genie.ask(query_input)
+    try:
+        return genie.ask(query_input) or "no answer"
+    except Exception as e:
+        print(e)
+        return Response(
+            "Error generating response. Please try again later.", status=500
+        )
